@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KIT Bites & Bytes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+
+  <!-- ==================== LOGIN ==================== -->
+  <div id="login-section" class="login-wrapper" >
+    <div class="login-card" style="background-image: url(https://i.pinimg.com/1200x/b1/9e/0f/b19e0f7f80c47b0c24fa3416741024af.jpg); background-size: cover; background-position: center; background-repeat: no-repeat;">
+      <div class="brand">
+        <span class="brand-name">🍵 KIT Bites & Bytes</span>
+      </div>
+      <h2>Admin Sign In</h2>
+      <p class="subtitle">Enter your admin credentials to continue</p>
+
+      <div class="form-group">
+        <label for="username">Email address</label>
+        <input type="email" id="username" value="admin@chaitheory.in" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" value="123456" autocomplete="current-password" />
+      </div>
+
+      <button id="login-btn" class="btn btn-primary btn-full" onclick="handleLogin()">Sign In</button>
+      <p id="login-error" class="error-msg"></p>
+    </div>
+  </div>
+
+  <!-- ==================== DASHBOARD ==================== -->
+  <div id="dashboard-section" class="admin-layout hidden">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-brand">
+        🍵 KIT Bites & Bytes &nbsp;<span style="color:var(--gray-400);font-weight:400;">Admin</span>
+      </div>
+      <div class="topbar-right">
+        <span class="admin-badge">● Admin</span>
+        <button id="logout-btn" class="btn btn-ghost btn-sm" onclick="handleLogout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" id="btn-tab-orders" onclick="switchTab('orders')">📋 Orders</button>
+      <button class="tab-btn" id="btn-tab-menu" onclick="switchTab('menu')">🍽 Menu Items</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- ===== ORDERS TAB ===== -->
+      <div id="tab-orders" class="tab-panel active">
+        <div class="section-header">
+          <span class="section-title">Live Orders</span>
+          <button class="btn btn-ghost btn-sm" onclick="renderOrders()">↻ Refresh</button>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Table</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-body">
+              <!-- Orders inserted via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== MENU TAB ===== -->
+      <div id="tab-menu" class="tab-panel">
+        <div class="menu-grid">
+
+          <!-- Add Form -->
+          <div class="form-card">
+            <h3>➕ Add Menu Item</h3>
+            <form id="menu-form" onsubmit="addMenuItem(event)">
+              <div class="form-group">
+                <label for="menu-name">Item Name</label>
+                <input type="text" id="menu-name" placeholder="e.g. Masala Chai" required />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="menu-category">Category</label>
+                  <select id="menu-category" required>
+                    <option value="">Select category</option>
+                    <option value="Hot Beverages">Hot Beverages</option>
+                    <option value="Cold Beverages">Cold Beverages</option>
+                    <option value="Snacks & Quick Bites">Snacks & Quick Bites</option>
+                    <option value="Desserts">Desserts</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="menu-price">Price (₹)</label>
+                  <input type="number" id="menu-price" placeholder="0" min="1" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="menu-description">Description</label>
+                <textarea id="menu-description" placeholder="Short description…" required></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Item</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Menu Item List -->
+          <div class="menu-list-panel">
+            <div class="panel-header">
+              <span>Current Menu</span>
+              <span id="menu-count" style="font-size:0.775rem;color:var(--gray-400);"></span>
+            </div>
+            <div id="menu-list">
+              <!-- Menu Items inserted via JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Built-in Standalone Logic -->
+    <script src="app.js"></script>
+
+</body>
+</html>
